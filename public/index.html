@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="constainer">
+      <header>
+        <h1>User management app</h1>
+        <p>View our deshboard, from the db</p>
+      </header>
+
+      <div class="stats">
+        <div class="stat-card">
+          <div class="total-users">0</div>
+          <div class="lable">Total Users</div>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat-card">
+          <div class="total-users" id="avgAge">0</div>
+          <div class="lable">Averge Age</div>
+        </div>
+      </div>
+
+      <!-- a form to add a new user -->
+      <form id="addUserForm">
+        <input type="text" id="name" placeholder="Enter your name " />
+        <input type="email" id="email" placeholder="Enter your email " />
+        <input type="number" id="age" placeholder="Enter your age" />
+
+        <button>Add User</button>
+      </form>
+    </div>
+
+    <div class="grid" id="usersGrid">
+      <!-- inner HTML -->
+      <div id="loader"></div>
+
+      <div id="users"></div>
+    </div>
+    <script src="/user-management/public/api.js"></script>
+  </body>
+</html>
