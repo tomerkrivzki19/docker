@@ -4,14 +4,14 @@
 //     : "http://localhost:3000/api/users";
 const API_URL =
   window.location.hostname === "localhost"
-    ? "http://localhost:3000/api/users"
-    : "https://docker-mpq5.onrender.com/api/users";
+    ? "/api"
+    : "https://docker-mpq5.onrender.com/api";
 
 const loader = document.getElementById("loader");
 
 async function loadUsers() {
   try {
-    const response = await fetch(API_URL);
+    const response = await fetch(`${API_URL}/users`);
 
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);

@@ -1,22 +1,39 @@
 services:
   app:
     build: .
-
-    ports:
-      - "5000:3000"
+    # בגלל משימה 6 כי עכשיו לא ניגשים ישירות ל־Node, אלא דרך Nginx.
+    # ports:
+    #   - "5000:3000"
 
     environment:
       DB_USER: ${DB_USER}
-
+      JWT_SECRET: ${JWT_SECRET}
       DB_PASSWORD: ${DB_PASSWORD}
 
       DB_NAME: ${DB_NAME}
 
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
+
+  # תוסיף שירות nginx:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app
 
   mongo:
     image: mongo:7
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
 
     ports:
       - "27017:27017"
